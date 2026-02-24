@@ -1,0 +1,35 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+.vs/
+.vscode/settings.json
+*.DotSettings.user
+
+## Secrets — NUNCA versionar
+appsettings.Development.json
+appsettings.Production.json
+secrets.json
+**/secrets/
+
+## EF Core migrations temporárias
+*.mig
+
+## Logs
+logs/
+*.log
+serilog/
+
+## Docker volumes
+pgdata/
+mongodata/
+
+## OS
+.DS_Store
+Thumbs.db
+
+## IDE
+.idea/
+*.sln.iml
