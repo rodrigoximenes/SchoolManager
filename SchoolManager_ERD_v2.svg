@@ -1,0 +1,834 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2600" height="2100" viewBox="0 0 2600 2100" font-family="Arial, sans-serif">
+  <defs>
+    <!-- Arrow for FK end (many side) -->
+    <marker id="crow-many" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#555" stroke-width="1.5"/>
+      <line x1="2" y1="2" x2="2" y2="10" stroke="#555" stroke-width="1.5"/>
+    </marker>
+    <marker id="crow-many-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#1A6B3C" stroke-width="1.5"/>
+      <line x1="2" y1="2" x2="2" y2="10" stroke="#1A6B3C" stroke-width="1.5"/>
+    </marker>
+    <marker id="crow-many-brown" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#7B3F00" stroke-width="1.5"/>
+      <line x1="2" y1="2" x2="2" y2="10" stroke="#7B3F00" stroke-width="1.5"/>
+    </marker>
+    <marker id="crow-many-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#2E75B6" stroke-width="1.5"/>
+      <line x1="2" y1="2" x2="2" y2="10" stroke="#2E75B6" stroke-width="1.5"/>
+    </marker>
+    <!-- One side marker -->
+    <marker id="one-end" markerWidth="8" markerHeight="12" refX="2" refY="6" orient="auto">
+      <line x1="2" y1="1" x2="2" y2="11" stroke="#555" stroke-width="1.5"/>
+    </marker>
+    <marker id="one-end-green" markerWidth="8" markerHeight="12" refX="2" refY="6" orient="auto">
+      <line x1="2" y1="1" x2="2" y2="11" stroke="#1A6B3C" stroke-width="1.5"/>
+    </marker>
+    <marker id="one-end-brown" markerWidth="8" markerHeight="12" refX="2" refY="6" orient="auto">
+      <line x1="2" y1="1" x2="2" y2="11" stroke="#7B3F00" stroke-width="1.5"/>
+    </marker>
+    <!-- Dashed blue for cross-BC -->
+    <marker id="cross-bc-end" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2E75B6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="2600" height="2100" fill="#F4F6F9"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="2600" height="52" fill="#1F4E79"/>
+  <text x="1300" y="34" text-anchor="middle" fill="white" font-size="20" font-weight="bold">SchoolManager — ERD com Propriedades de Navegação (DDD + EF Core)</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="2180" y="62" width="400" height="330" rx="8" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+  <text x="2380" y="85" text-anchor="middle" fill="#1F4E79" font-size="13" font-weight="bold">LEGENDA</text>
+
+  <rect x="2195" y="95" width="13" height="13" fill="#1F4E79" rx="2"/>
+  <text x="2215" y="106" fill="#333" font-size="11">Banco MASTER</text>
+  <rect x="2195" y="114" width="13" height="13" fill="#1A6B3C" rx="2"/>
+  <text x="2215" y="125" fill="#333" font-size="11">CoreDomain (Academico)</text>
+  <rect x="2195" y="133" width="13" height="13" fill="#7B3F00" rx="2"/>
+  <text x="2215" y="144" fill="#333" font-size="11">SupportDomain (RH/Fin.)</text>
+  <rect x="2195" y="152" width="13" height="13" fill="#5B2D8E" rx="2"/>
+  <text x="2215" y="163" fill="#333" font-size="11">Identity (ASP.NET)</text>
+
+  <line x1="2195" y1="182" x2="2245" y2="182" stroke="#555" stroke-width="1.5" marker-start="url(#one-end)" marker-end="url(#crow-many)"/>
+  <text x="2252" y="186" fill="#333" font-size="11">Relacao 1:N obrigatoria</text>
+
+  <line x1="2195" y1="202" x2="2245" y2="202" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#crow-many)"/>
+  <text x="2252" y="206" fill="#333" font-size="11">FK opcional (nullable)</text>
+
+  <line x1="2195" y1="222" x2="2245" y2="222" stroke="#2E75B6" stroke-width="1.5" stroke-dasharray="7,4" marker-end="url(#cross-bc-end)"/>
+  <text x="2252" y="226" fill="#333" font-size="11">Ref. cross-BC (mesmo Guid)</text>
+
+  <rect x="2195" y="240" width="370" height="20" rx="3" fill="#FFF0F0" stroke="#FFAAAA"/>
+  <text x="2380" y="254" text-anchor="middle" fill="#C0392B" font-size="10" font-weight="bold">PK = Guid gerado no dominio</text>
+
+  <rect x="2195" y="266" width="370" height="20" rx="3" fill="#F0FFF0" stroke="#AADDAA"/>
+  <text x="2380" y="280" text-anchor="middle" fill="#1A6B3C" font-size="10">IReadOnlyCollection = private set no dominio</text>
+
+  <rect x="2195" y="292" width="370" height="20" rx="3" fill="#FFFAF0" stroke="#DDCC88"/>
+  <text x="2380" y="306" text-anchor="middle" fill="#AA6600" font-size="10">VO = Value Object (Owned Type EF Core)</text>
+
+  <rect x="2195" y="318" width="370" height="20" rx="3" fill="#F5F0FF" stroke="#CCAAFF"/>
+  <text x="2380" y="332" text-anchor="middle" fill="#5B2D8E" font-size="10">Toda entidade tem: DataCriacao, DataAtualizacao,</text>
+  <text x="2380" y="348" text-anchor="middle" fill="#5B2D8E" font-size="10">IsDeleted (bit), DataExclusao (datetime2 NULL)</text>
+  <text x="2380" y="364" text-anchor="middle" fill="#5B2D8E" font-size="10">+ Filtered Index em IsDeleted = 0</text>
+
+  <!-- ================================================================ -->
+  <!-- MASTER BANK ZONE -->
+  <!-- ================================================================ -->
+  <rect x="10" y="62" width="860" height="580" rx="10" fill="#EBF3FB" stroke="#1F4E79" stroke-width="2" stroke-dasharray="9,4"/>
+  <text x="440" y="85" text-anchor="middle" fill="#1F4E79" font-size="13" font-weight="bold">BANCO MASTER — SchoolManager_Master</text>
+
+  <!-- Escolas table -->
+  <rect x="24" y="96" width="330" height="310" rx="6" fill="white" stroke="#1F4E79" stroke-width="2"/>
+  <rect x="24" y="96" width="330" height="26" rx="6" fill="#1F4E79"/>
+  <text x="189" y="114" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Escolas</text>
+  <!-- header row -->
+  <rect x="24" y="122" width="330" height="18" fill="#E8EEF7"/>
+  <text x="39" y="135" fill="#1F4E79" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="200" y="135" fill="#1F4E79" font-size="9" font-weight="bold">TIPO</text>
+  <text x="300" y="135" fill="#1F4E79" font-size="9" font-weight="bold">RESTRICAO</text>
+  <line x1="24" y1="140" x2="354" y2="140" stroke="#CCCCCC"/>
+  <text x="39" y="153" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="200" y="153" fill="#555" font-size="10">Guid</text>
+  <text x="300" y="153" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="157" x2="354" y2="157" stroke="#EEEEEE"/>
+  <text x="39" y="170" fill="#333" font-size="10">    Nome</text>
+  <text x="200" y="170" fill="#555" font-size="10">nvarchar(200)</text>
+  <text x="300" y="170" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="174" x2="354" y2="174" stroke="#EEEEEE"/>
+  <text x="39" y="187" fill="#333" font-size="10">    CNPJ</text>
+  <text x="200" y="187" fill="#555" font-size="10">nvarchar(18)</text>
+  <text x="300" y="187" fill="#555" font-size="10">UNIQUE</text>
+  <line x1="24" y1="191" x2="354" y2="191" stroke="#EEEEEE"/>
+  <text x="39" y="204" fill="#333" font-size="10">    ConnectionString</text>
+  <text x="200" y="204" fill="#555" font-size="10">nvarchar(500)</text>
+  <text x="300" y="204" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="208" x2="354" y2="208" stroke="#EEEEEE"/>
+  <text x="39" y="221" fill="#333" font-size="10">    Ativo</text>
+  <text x="200" y="221" fill="#555" font-size="10">bit</text>
+  <text x="300" y="221" fill="#555" font-size="10">DEFAULT 1</text>
+  <line x1="24" y1="225" x2="354" y2="225" stroke="#EEEEEE"/>
+  <text x="39" y="238" fill="#333" font-size="10">    TermosAceitos</text>
+  <text x="200" y="238" fill="#555" font-size="10">bit</text>
+  <text x="300" y="238" fill="#555" font-size="10">DEFAULT 0</text>
+  <line x1="24" y1="242" x2="354" y2="242" stroke="#EEEEEE"/>
+  <text x="39" y="255" fill="#333" font-size="10">    DataAceiteTermos</text>
+  <text x="200" y="255" fill="#555" font-size="10">datetime2</text>
+  <text x="300" y="255" fill="#555" font-size="10">NULL</text>
+  <line x1="24" y1="259" x2="354" y2="259" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <!-- nav props -->
+  <rect x="24" y="259" width="330" height="18" fill="#F0F5FF"/>
+  <text x="39" y="272" fill="#2E75B6" font-size="9" font-weight="bold">NAVEGACAO (dominio)</text>
+  <line x1="24" y1="277" x2="354" y2="277" stroke="#EEEEEE"/>
+  <text x="39" y="290" fill="#2E75B6" font-size="10" font-style="italic">— sem colecoes (apenas leitura)</text>
+  <line x1="24" y1="294" x2="354" y2="294" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="307" fill="#888" font-size="9">IDX: CNPJ (UNIQUE), Ativo</text>
+  <text x="39" y="320" fill="#888" font-size="9">Sem soft-delete em Escola (inativacao via Ativo)</text>
+  <text x="39" y="333" fill="#888" font-size="9">Tem: DataCriacao, DataAtualizacao</text>
+  <text x="39" y="346" fill="#888" font-size="9">Chave de roteamento multi-tenant</text>
+
+  <!-- AspNetUsers -->
+  <rect x="375" y="96" width="340" height="270" rx="6" fill="white" stroke="#5B2D8E" stroke-width="2"/>
+  <rect x="375" y="96" width="340" height="26" rx="6" fill="#5B2D8E"/>
+  <text x="545" y="114" text-anchor="middle" fill="white" font-size="12" font-weight="bold">AspNetUsers  (Identity)</text>
+  <rect x="375" y="122" width="340" height="18" fill="#EDE7F6"/>
+  <text x="390" y="135" fill="#5B2D8E" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="570" y="135" fill="#5B2D8E" font-size="9" font-weight="bold">TIPO / OBS</text>
+  <line x1="375" y1="140" x2="715" y2="140" stroke="#CCCCCC"/>
+  <text x="390" y="153" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="570" y="153" fill="#555" font-size="10">nvarchar(450)</text>
+  <line x1="375" y1="157" x2="715" y2="157" stroke="#EEEEEE"/>
+  <text x="390" y="170" fill="#333" font-size="10">    UserName, Email</text>
+  <text x="570" y="170" fill="#555" font-size="10">nvarchar(256)</text>
+  <line x1="375" y1="174" x2="715" y2="174" stroke="#EEEEEE"/>
+  <text x="390" y="187" fill="#333" font-size="10">    PasswordHash</text>
+  <text x="570" y="187" fill="#555" font-size="10">nvarchar(max)</text>
+  <line x1="375" y1="191" x2="715" y2="191" stroke="#EEEEEE"/>
+  <text x="390" y="204" fill="#333" font-size="10">    EscolaId  (claim)</text>
+  <text x="570" y="204" fill="#555" font-size="10">Guid — roteamento</text>
+  <line x1="375" y1="208" x2="715" y2="208" stroke="#EEEEEE"/>
+  <text x="390" y="221" fill="#555" font-size="10" font-style="italic">    + campos padrao Identity</text>
+  <line x1="375" y1="225" x2="715" y2="225" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <rect x="375" y="225" width="340" height="18" fill="#F0F5FF"/>
+  <text x="390" y="238" fill="#2E75B6" font-size="9" font-weight="bold">NAVEGACAO</text>
+  <line x1="375" y1="243" x2="715" y2="243" stroke="#EEEEEE"/>
+  <text x="390" y="256" fill="#2E75B6" font-size="10" font-style="italic">IList&lt;RefreshToken&gt; RefreshTokens</text>
+  <text x="390" y="270" fill="#2E75B6" font-size="10" font-style="italic">IList&lt;ApiLog&gt; ApiLogs</text>
+  <line x1="375" y1="276" x2="715" y2="276" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="390" y="289" fill="#888" font-size="9">Roles: Administrador | Diretor | Professor | Responsavel | Aluno</text>
+  <text x="390" y="302" fill="#888" font-size="9">AspNetRoles, AspNetUserRoles, AspNetUserClaims...</text>
+  <text x="390" y="315" fill="#888" font-size="9">AspNetRoleClaims, AspNetUserTokens, AspNetUserLogins</text>
+
+  <!-- RefreshTokens -->
+  <rect x="24" y="430" width="330" height="200" rx="6" fill="white" stroke="#1F4E79" stroke-width="2"/>
+  <rect x="24" y="430" width="330" height="26" rx="6" fill="#1F4E79"/>
+  <text x="189" y="448" text-anchor="middle" fill="white" font-size="12" font-weight="bold">RefreshTokens</text>
+  <rect x="24" y="456" width="330" height="18" fill="#E8EEF7"/>
+  <text x="39" y="469" fill="#1F4E79" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="200" y="469" fill="#1F4E79" font-size="9" font-weight="bold">TIPO</text>
+  <text x="300" y="469" fill="#1F4E79" font-size="9" font-weight="bold">RESTRICAO</text>
+  <line x1="24" y1="474" x2="354" y2="474" stroke="#CCCCCC"/>
+  <text x="39" y="487" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="200" y="487" fill="#555" font-size="10">Guid</text>
+  <line x1="24" y1="491" x2="354" y2="491" stroke="#EEEEEE"/>
+  <text x="39" y="504" fill="#0000AA" font-size="10" font-weight="bold">FK  UserId</text>
+  <text x="200" y="504" fill="#555" font-size="10">nvarchar(450)</text>
+  <text x="300" y="504" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="508" x2="354" y2="508" stroke="#EEEEEE"/>
+  <text x="39" y="521" fill="#333" font-size="10">    Token</text>
+  <text x="200" y="521" fill="#555" font-size="10">nvarchar(500)</text>
+  <text x="300" y="521" fill="#555" font-size="10">UNIQUE</text>
+  <line x1="24" y1="525" x2="354" y2="525" stroke="#EEEEEE"/>
+  <text x="39" y="538" fill="#333" font-size="10">    DataExpiracao</text>
+  <text x="200" y="538" fill="#555" font-size="10">datetime2</text>
+  <text x="300" y="538" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="542" x2="354" y2="542" stroke="#EEEEEE"/>
+  <text x="39" y="555" fill="#333" font-size="10">    IsRevoked</text>
+  <text x="200" y="555" fill="#555" font-size="10">bit</text>
+  <text x="300" y="555" fill="#555" font-size="10">DEFAULT 0</text>
+  <line x1="24" y1="559" x2="354" y2="559" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="572" fill="#2E75B6" font-size="10" font-style="italic">AspNetUser Usuario  (nav prop)</text>
+  <text x="39" y="587" fill="#888" font-size="9">IDX: Token (UNIQUE), UserId</text>
+  <text x="39" y="600" fill="#888" font-size="9">Sem soft-delete (revogacao via IsRevoked)</text>
+  <text x="39" y="615" fill="#888" font-size="9">DataCriacao (sem DataAtualizacao)</text>
+
+  <!-- ApiLogs -->
+  <rect x="375" y="390" width="340" height="230" rx="6" fill="white" stroke="#1F4E79" stroke-width="2"/>
+  <rect x="375" y="390" width="340" height="26" rx="6" fill="#1F4E79"/>
+  <text x="545" y="408" text-anchor="middle" fill="white" font-size="12" font-weight="bold">ApiLogs</text>
+  <rect x="375" y="416" width="340" height="18" fill="#E8EEF7"/>
+  <text x="390" y="429" fill="#1F4E79" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="570" y="429" fill="#1F4E79" font-size="9" font-weight="bold">TIPO</text>
+  <line x1="375" y1="434" x2="715" y2="434" stroke="#CCCCCC"/>
+  <text x="390" y="447" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="570" y="447" fill="#555" font-size="10">Guid</text>
+  <line x1="375" y1="451" x2="715" y2="451" stroke="#EEEEEE"/>
+  <text x="390" y="464" fill="#0000AA" font-size="10" font-weight="bold">FK  UserId</text>
+  <text x="570" y="464" fill="#555" font-size="10">nvarchar(450) NOT NULL</text>
+  <line x1="375" y1="468" x2="715" y2="468" stroke="#EEEEEE"/>
+  <text x="390" y="481" fill="#333" font-size="10">    EscolaId</text>
+  <text x="570" y="481" fill="#555" font-size="10">Guid NULL</text>
+  <line x1="375" y1="485" x2="715" y2="485" stroke="#EEEEEE"/>
+  <text x="390" y="498" fill="#333" font-size="10">    Endpoint</text>
+  <text x="570" y="498" fill="#555" font-size="10">nvarchar(500)</text>
+  <line x1="375" y1="502" x2="715" y2="502" stroke="#EEEEEE"/>
+  <text x="390" y="515" fill="#333" font-size="10">    MetodoHttp</text>
+  <text x="570" y="515" fill="#555" font-size="10">nvarchar(10)</text>
+  <line x1="375" y1="519" x2="715" y2="519" stroke="#EEEEEE"/>
+  <text x="390" y="532" fill="#333" font-size="10">    StatusCode</text>
+  <text x="570" y="532" fill="#555" font-size="10">int NOT NULL</text>
+  <line x1="375" y1="536" x2="715" y2="536" stroke="#EEEEEE"/>
+  <text x="390" y="549" fill="#333" font-size="10">    Timestamp</text>
+  <text x="570" y="549" fill="#555" font-size="10">datetime2 NOT NULL</text>
+  <line x1="375" y1="553" x2="715" y2="553" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="390" y="566" fill="#2E75B6" font-size="10" font-style="italic">AspNetUser Usuario  (nav prop)</text>
+  <text x="390" y="580" fill="#888" font-size="9">IDX: UserId, Timestamp, EscolaId</text>
+  <text x="390" y="595" fill="#888" font-size="9">Log imutavel — sem IsDeleted, sem Update</text>
+
+  <!-- ================================================================ -->
+  <!-- CORE DOMAIN ZONE -->
+  <!-- ================================================================ -->
+  <rect x="10" y="660" width="1380" height="1420" rx="10" fill="#E8F5E9" stroke="#1A6B3C" stroke-width="2" stroke-dasharray="9,4"/>
+  <text x="700" y="683" text-anchor="middle" fill="#1A6B3C" font-size="13" font-weight="bold">BANCO ESCOLA — CoreDomain (Contexto Academico)</text>
+
+  <!-- ===== TURMAS ===== -->
+  <rect x="24" y="696" width="340" height="310" rx="6" fill="white" stroke="#1A6B3C" stroke-width="2"/>
+  <rect x="24" y="696" width="340" height="26" rx="6" fill="#1A6B3C"/>
+  <text x="194" y="714" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Turmas</text>
+  <rect x="24" y="722" width="340" height="18" fill="#E8F5E9"/>
+  <text x="39" y="735" fill="#1A6B3C" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="210" y="735" fill="#1A6B3C" font-size="9" font-weight="bold">TIPO</text>
+  <text x="305" y="735" fill="#1A6B3C" font-size="9" font-weight="bold">RESTRICAO</text>
+  <line x1="24" y1="740" x2="364" y2="740" stroke="#CCCCCC"/>
+  <text x="39" y="753" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="210" y="753" fill="#555" font-size="10">Guid</text>
+  <line x1="24" y1="757" x2="364" y2="757" stroke="#EEEEEE"/>
+  <text x="39" y="770" fill="#333" font-size="10">    Turno</text>
+  <text x="210" y="770" fill="#555" font-size="10">int</text>
+  <text x="305" y="770" fill="#555" font-size="10">0=Manha 1=Tarde</text>
+  <line x1="24" y1="774" x2="364" y2="774" stroke="#EEEEEE"/>
+  <text x="39" y="787" fill="#333" font-size="10">    Periodo</text>
+  <text x="210" y="787" fill="#555" font-size="10">int</text>
+  <text x="305" y="787" fill="#555" font-size="10">CHK &gt;= 2000</text>
+  <line x1="24" y1="791" x2="364" y2="791" stroke="#EEEEEE"/>
+  <text x="39" y="804" fill="#333" font-size="10">    Ativo</text>
+  <text x="210" y="804" fill="#555" font-size="10">bit</text>
+  <text x="305" y="804" fill="#555" font-size="10">DEFAULT 1</text>
+  <line x1="24" y1="808" x2="364" y2="808" stroke="#EEEEEE"/>
+  <text x="39" y="821" fill="#555" font-size="10" font-style="italic">    DataCriacao, DataAtualizacao</text>
+  <line x1="24" y1="825" x2="364" y2="825" stroke="#EEEEEE"/>
+  <text x="39" y="838" fill="#555" font-size="10" font-style="italic">    IsDeleted, DataExclusao</text>
+  <!-- nav section -->
+  <line x1="24" y1="842" x2="364" y2="842" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <rect x="24" y="842" width="340" height="18" fill="#F0FFF0"/>
+  <text x="39" y="855" fill="#1A6B3C" font-size="9" font-weight="bold">NAVEGACAO (IReadOnlyCollection = private backing list)</text>
+  <line x1="24" y1="860" x2="364" y2="860" stroke="#EEEEEE"/>
+  <text x="39" y="873" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;TurmaProfessor&gt; Professores</text>
+  <line x1="24" y1="877" x2="364" y2="877" stroke="#EEEEEE"/>
+  <text x="39" y="890" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;TurmaAluno&gt; Alunos</text>
+  <line x1="24" y1="894" x2="364" y2="894" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="907" fill="#888" font-size="9">IDX: Periodo, Ativo | FILTER: IsDeleted=0</text>
+  <text x="39" y="920" fill="#888" font-size="9">Metodos: AdicionarProfessor(), AdicionarAluno()</text>
+  <text x="39" y="933" fill="#888" font-size="9">         RemoverAluno(), Desativar(), Excluir()</text>
+
+  <!-- ===== TurmaProfessores ===== -->
+  <rect x="24" y="1040" width="340" height="180" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="24" y="1040" width="340" height="26" rx="6" fill="#2E7D32"/>
+  <text x="194" y="1058" text-anchor="middle" fill="white" font-size="11" font-weight="bold">TurmaProfessores  (assoc. N:N)</text>
+  <rect x="24" y="1066" width="340" height="18" fill="#F1F8F1"/>
+  <text x="39" y="1079" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="210" y="1079" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="24" y1="1084" x2="364" y2="1084" stroke="#CCCCCC"/>
+  <text x="39" y="1097" fill="#880000" font-size="10" font-weight="bold">PK  TurmaId</text>
+  <text x="210" y="1097" fill="#555" font-size="10">Guid FK → Turmas</text>
+  <line x1="24" y1="1101" x2="364" y2="1101" stroke="#EEEEEE"/>
+  <text x="39" y="1114" fill="#880000" font-size="10" font-weight="bold">PK  ProfessorId</text>
+  <text x="210" y="1114" fill="#555" font-size="10">Guid FK → Professores</text>
+  <line x1="24" y1="1118" x2="364" y2="1118" stroke="#EEEEEE"/>
+  <text x="39" y="1131" fill="#333" font-size="10">    DataVinculo</text>
+  <text x="210" y="1131" fill="#555" font-size="10">datetime2 NOT NULL</text>
+  <line x1="24" y1="1135" x2="364" y2="1135" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="1148" fill="#2E75B6" font-size="10" font-style="italic">Turma Turma  (nav)</text>
+  <line x1="24" y1="1152" x2="364" y2="1152" stroke="#EEEEEE"/>
+  <text x="39" y="1165" fill="#2E75B6" font-size="10" font-style="italic">Professor Professor  (nav)</text>
+  <line x1="24" y1="1169" x2="364" y2="1169" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="1183" fill="#888" font-size="9">PK composta: (TurmaId, ProfessorId)</text>
+  <text x="39" y="1197" fill="#888" font-size="9">Sem IsDeleted — remover vinculo fisicamente</text>
+
+  <!-- ===== TurmaAlunos ===== -->
+  <rect x="24" y="1245" width="340" height="180" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="24" y="1245" width="340" height="26" rx="6" fill="#2E7D32"/>
+  <text x="194" y="1263" text-anchor="middle" fill="white" font-size="11" font-weight="bold">TurmaAlunos  (assoc. N:N)</text>
+  <rect x="24" y="1271" width="340" height="18" fill="#F1F8F1"/>
+  <text x="39" y="1284" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="210" y="1284" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="24" y1="1289" x2="364" y2="1289" stroke="#CCCCCC"/>
+  <text x="39" y="1302" fill="#880000" font-size="10" font-weight="bold">PK  TurmaId</text>
+  <text x="210" y="1302" fill="#555" font-size="10">Guid FK → Turmas</text>
+  <line x1="24" y1="1306" x2="364" y2="1306" stroke="#EEEEEE"/>
+  <text x="39" y="1319" fill="#880000" font-size="10" font-weight="bold">PK  AlunoId</text>
+  <text x="210" y="1319" fill="#555" font-size="10">Guid FK → Alunos</text>
+  <line x1="24" y1="1323" x2="364" y2="1323" stroke="#EEEEEE"/>
+  <text x="39" y="1336" fill="#333" font-size="10">    DataVinculo</text>
+  <text x="210" y="1336" fill="#555" font-size="10">datetime2 NOT NULL</text>
+  <line x1="24" y1="1340" x2="364" y2="1340" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="1353" fill="#2E75B6" font-size="10" font-style="italic">Turma Turma  (nav)</text>
+  <line x1="24" y1="1357" x2="364" y2="1357" stroke="#EEEEEE"/>
+  <text x="39" y="1370" fill="#2E75B6" font-size="10" font-style="italic">Aluno Aluno  (nav)</text>
+  <line x1="24" y1="1374" x2="364" y2="1374" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="1388" fill="#888" font-size="9">PK composta: (TurmaId, AlunoId)</text>
+  <text x="39" y="1402" fill="#888" font-size="9">Sem IsDeleted — remover vinculo fisicamente</text>
+
+  <!-- ===== PROFESSORES ===== -->
+  <rect x="400" y="696" width="360" height="340" rx="6" fill="white" stroke="#1A6B3C" stroke-width="2"/>
+  <rect x="400" y="696" width="360" height="26" rx="6" fill="#1A6B3C"/>
+  <text x="580" y="714" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Professores</text>
+  <rect x="400" y="722" width="360" height="18" fill="#E8F5E9"/>
+  <text x="415" y="735" fill="#1A6B3C" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="600" y="735" fill="#1A6B3C" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="400" y1="740" x2="760" y2="740" stroke="#CCCCCC"/>
+  <text x="415" y="753" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="600" y="753" fill="#555" font-size="10">Guid</text>
+  <line x1="400" y1="757" x2="760" y2="757" stroke="#EEEEEE"/>
+  <text x="415" y="770" fill="#AA6600" font-size="10">VO  NomePessoa_PrimeiroNome</text>
+  <text x="600" y="770" fill="#555" font-size="10">nvarchar(100)</text>
+  <line x1="400" y1="774" x2="760" y2="774" stroke="#EEEEEE"/>
+  <text x="415" y="787" fill="#AA6600" font-size="10">VO  NomePessoa_Sobrenome</text>
+  <text x="600" y="787" fill="#555" font-size="10">nvarchar(200)</text>
+  <line x1="400" y1="791" x2="760" y2="791" stroke="#EEEEEE"/>
+  <text x="415" y="804" fill="#555" font-size="10" font-style="italic">    DataCriacao, DataAtualizacao</text>
+  <line x1="400" y1="808" x2="760" y2="808" stroke="#EEEEEE"/>
+  <text x="415" y="821" fill="#555" font-size="10" font-style="italic">    IsDeleted, DataExclusao</text>
+  <line x1="400" y1="825" x2="760" y2="825" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <rect x="400" y="825" width="360" height="18" fill="#F0FFF0"/>
+  <text x="415" y="838" fill="#1A6B3C" font-size="9" font-weight="bold">NAVEGACAO</text>
+  <line x1="400" y1="843" x2="760" y2="843" stroke="#EEEEEE"/>
+  <text x="415" y="856" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;Disciplina&gt; Disciplinas</text>
+  <line x1="400" y1="860" x2="760" y2="860" stroke="#EEEEEE"/>
+  <text x="415" y="873" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;TurmaProfessor&gt; Turmas</text>
+  <line x1="400" y1="877" x2="760" y2="877" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="415" y="890" fill="#888" font-size="9">IDX: NomePessoa_Sobrenome | FILTER: IsDeleted=0</text>
+  <text x="415" y="903" fill="#2E75B6" font-size="9" font-style="italic">ProfessorId = FuncionarioId no SupportDomain</text>
+  <text x="415" y="916" fill="#888" font-size="9">VO NomePessoa: OwnedOne no EF Core</text>
+  <text x="415" y="929" fill="#888" font-size="9">Metodos: AdicionarDisciplina(), RemoverDisciplina()</text>
+  <text x="415" y="942" fill="#888" font-size="9">         MarcarComoExcluido()</text>
+
+  <!-- ===== DISCIPLINAS ===== -->
+  <rect x="400" y="1060" width="360" height="200" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="400" y="1060" width="360" height="26" rx="6" fill="#2E7D32"/>
+  <text x="580" y="1078" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Disciplinas  (VO de Professor)</text>
+  <rect x="400" y="1086" width="360" height="18" fill="#F1F8F1"/>
+  <text x="415" y="1099" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="600" y="1099" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="400" y1="1104" x2="760" y2="1104" stroke="#CCCCCC"/>
+  <text x="415" y="1117" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="600" y="1117" fill="#555" font-size="10">Guid</text>
+  <line x1="400" y1="1121" x2="760" y2="1121" stroke="#EEEEEE"/>
+  <text x="415" y="1134" fill="#0000AA" font-size="10" font-weight="bold">FK  ProfessorId</text>
+  <text x="600" y="1134" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="400" y1="1138" x2="760" y2="1138" stroke="#EEEEEE"/>
+  <text x="415" y="1151" fill="#333" font-size="10">    Nome</text>
+  <text x="600" y="1151" fill="#555" font-size="10">nvarchar(150) NOT NULL</text>
+  <line x1="400" y1="1155" x2="760" y2="1155" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="415" y="1168" fill="#2E75B6" font-size="10" font-style="italic">Professor Professor  (nav)</text>
+  <line x1="400" y1="1172" x2="760" y2="1172" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="415" y="1185" fill="#888" font-size="9">IDX: ProfessorId</text>
+  <text x="415" y="1198" fill="#888" font-size="9">UNIQUE: (ProfessorId, Nome)</text>
+  <text x="415" y="1212" fill="#888" font-size="9">Mapeado via OwnsMany — owned type do Professor</text>
+  <text x="415" y="1226" fill="#888" font-size="9">FK usada em Notas e Presencas</text>
+  <text x="415" y="1240" fill="#888" font-size="9">Sem IsDeleted (ciclo de vida junto com Professor)</text>
+
+  <!-- ===== ALUNOS ===== -->
+  <rect x="800" y="696" width="370" height="330" rx="6" fill="white" stroke="#1A6B3C" stroke-width="2"/>
+  <rect x="800" y="696" width="370" height="26" rx="6" fill="#1A6B3C"/>
+  <text x="985" y="714" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Alunos</text>
+  <rect x="800" y="722" width="370" height="18" fill="#E8F5E9"/>
+  <text x="815" y="735" fill="#1A6B3C" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="1020" y="735" fill="#1A6B3C" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="800" y1="740" x2="1170" y2="740" stroke="#CCCCCC"/>
+  <text x="815" y="753" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="1020" y="753" fill="#555" font-size="10">Guid</text>
+  <line x1="800" y1="757" x2="1170" y2="757" stroke="#EEEEEE"/>
+  <text x="815" y="770" fill="#333" font-size="10">    Nome</text>
+  <text x="1020" y="770" fill="#555" font-size="10">nvarchar(300) NOT NULL</text>
+  <line x1="800" y1="774" x2="1170" y2="774" stroke="#EEEEEE"/>
+  <text x="815" y="787" fill="#333" font-size="10">    DataNascimento</text>
+  <text x="1020" y="787" fill="#555" font-size="10">date NULL</text>
+  <line x1="800" y1="791" x2="1170" y2="791" stroke="#EEEEEE"/>
+  <text x="815" y="804" fill="#555" font-size="10" font-style="italic">    DataCriacao, DataAtualizacao</text>
+  <line x1="800" y1="808" x2="1170" y2="808" stroke="#EEEEEE"/>
+  <text x="815" y="821" fill="#555" font-size="10" font-style="italic">    IsDeleted, DataExclusao</text>
+  <line x1="800" y1="825" x2="1170" y2="825" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <rect x="800" y="825" width="370" height="18" fill="#F0FFF0"/>
+  <text x="815" y="838" fill="#1A6B3C" font-size="9" font-weight="bold">NAVEGACAO</text>
+  <line x1="800" y1="843" x2="1170" y2="843" stroke="#EEEEEE"/>
+  <text x="815" y="856" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;AlunoResponsavel&gt; Responsaveis</text>
+  <line x1="800" y1="860" x2="1170" y2="860" stroke="#EEEEEE"/>
+  <text x="815" y="873" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;Nota&gt; Notas</text>
+  <line x1="800" y1="877" x2="1170" y2="877" stroke="#EEEEEE"/>
+  <text x="815" y="890" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;Presenca&gt; Presencas</text>
+  <line x1="800" y1="894" x2="1170" y2="894" stroke="#EEEEEE"/>
+  <text x="815" y="907" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;TurmaAluno&gt; Turmas</text>
+  <line x1="800" y1="911" x2="1170" y2="911" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="815" y="924" fill="#888" font-size="9">IDX: Nome | FILTER: IsDeleted=0</text>
+  <text x="815" y="937" fill="#2E75B6" font-size="9" font-style="italic">AlunoId = AlunoId em Matriculas (SupportDomain)</text>
+  <text x="815" y="951" fill="#888" font-size="9">Metodos: AdicionarResponsavel(), LancarNota()</text>
+  <text x="815" y="965" fill="#888" font-size="9">         RegistrarPresenca(), MarcarComoExcluido()</text>
+
+  <!-- ===== AlunoResponsaveis ===== -->
+  <rect x="800" y="1050" width="370" height="210" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="800" y="1050" width="370" height="26" rx="6" fill="#2E7D32"/>
+  <text x="985" y="1068" text-anchor="middle" fill="white" font-size="11" font-weight="bold">AlunoResponsaveis</text>
+  <rect x="800" y="1076" width="370" height="18" fill="#F1F8F1"/>
+  <text x="815" y="1089" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="1020" y="1089" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="800" y1="1094" x2="1170" y2="1094" stroke="#CCCCCC"/>
+  <text x="815" y="1107" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="1020" y="1107" fill="#555" font-size="10">Guid</text>
+  <line x1="800" y1="1111" x2="1170" y2="1111" stroke="#EEEEEE"/>
+  <text x="815" y="1124" fill="#0000AA" font-size="10" font-weight="bold">FK  AlunoId</text>
+  <text x="1020" y="1124" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="800" y1="1128" x2="1170" y2="1128" stroke="#EEEEEE"/>
+  <text x="815" y="1141" fill="#333" font-size="10">    Nome</text>
+  <text x="1020" y="1141" fill="#555" font-size="10">nvarchar(300) NOT NULL</text>
+  <line x1="800" y1="1145" x2="1170" y2="1145" stroke="#EEEEEE"/>
+  <text x="815" y="1158" fill="#333" font-size="10">    Parentesco</text>
+  <text x="1020" y="1158" fill="#555" font-size="10">nvarchar(100) NULL</text>
+  <line x1="800" y1="1162" x2="1170" y2="1162" stroke="#EEEEEE"/>
+  <text x="815" y="1175" fill="#333" font-size="10">    Telefone</text>
+  <text x="1020" y="1175" fill="#555" font-size="10">nvarchar(20) NULL</text>
+  <line x1="800" y1="1179" x2="1170" y2="1179" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="815" y="1192" fill="#2E75B6" font-size="10" font-style="italic">Aluno Aluno  (nav)</text>
+  <line x1="800" y1="1196" x2="1170" y2="1196" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="815" y="1209" fill="#888" font-size="9">IDX: AlunoId</text>
+  <text x="815" y="1223" fill="#888" font-size="9">Sem IsDeleted — ciclo de vida junto com Aluno</text>
+  <text x="815" y="1237" fill="#888" font-size="9">Cascade delete via EF Core configurado</text>
+  <text x="815" y="1251" fill="#888" font-size="9">DataCriacao (sem DataAtualizacao)</text>
+
+  <!-- ===== NOTAS ===== -->
+  <rect x="800" y="1285" width="370" height="225" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="800" y="1285" width="370" height="26" rx="6" fill="#2E7D32"/>
+  <text x="985" y="1303" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Notas  (VO de Aluno)</text>
+  <rect x="800" y="1311" width="370" height="18" fill="#F1F8F1"/>
+  <text x="815" y="1324" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="1020" y="1324" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="800" y1="1329" x2="1170" y2="1329" stroke="#CCCCCC"/>
+  <text x="815" y="1342" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="1020" y="1342" fill="#555" font-size="10">Guid</text>
+  <line x1="800" y1="1346" x2="1170" y2="1346" stroke="#EEEEEE"/>
+  <text x="815" y="1359" fill="#0000AA" font-size="10" font-weight="bold">FK  AlunoId</text>
+  <text x="1020" y="1359" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="800" y1="1363" x2="1170" y2="1363" stroke="#EEEEEE"/>
+  <text x="815" y="1376" fill="#0000AA" font-size="10" font-weight="bold">FK  DisciplinaId</text>
+  <text x="1020" y="1376" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="800" y1="1380" x2="1170" y2="1380" stroke="#EEEEEE"/>
+  <text x="815" y="1393" fill="#333" font-size="10">    Valor</text>
+  <text x="1020" y="1393" fill="#555" font-size="10">decimal(5,2) CHK 0-10</text>
+  <line x1="800" y1="1397" x2="1170" y2="1397" stroke="#EEEEEE"/>
+  <text x="815" y="1410" fill="#333" font-size="10">    Data</text>
+  <text x="1020" y="1410" fill="#555" font-size="10">date NOT NULL</text>
+  <line x1="800" y1="1414" x2="1170" y2="1414" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="815" y="1427" fill="#2E75B6" font-size="10" font-style="italic">Aluno Aluno  (nav)</text>
+  <line x1="800" y1="1431" x2="1170" y2="1431" stroke="#EEEEEE"/>
+  <text x="815" y="1444" fill="#2E75B6" font-size="10" font-style="italic">Disciplina Disciplina  (nav)</text>
+  <line x1="800" y1="1448" x2="1170" y2="1448" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="815" y="1461" fill="#888" font-size="9">IDX: AlunoId, DisciplinaId</text>
+  <text x="815" y="1475" fill="#888" font-size="9">OwnsMany → sem IsDeleted proprio</text>
+  <text x="815" y="1489" fill="#888" font-size="9">CHK: Valor BETWEEN 0 AND 10</text>
+
+  <!-- ===== PRESENCAS ===== -->
+  <rect x="400" y="1290" width="360" height="250" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="400" y="1290" width="360" height="26" rx="6" fill="#2E7D32"/>
+  <text x="580" y="1308" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Presencas  (VO de Aluno)</text>
+  <rect x="400" y="1316" width="360" height="18" fill="#F1F8F1"/>
+  <text x="415" y="1329" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="600" y="1329" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="400" y1="1334" x2="760" y2="1334" stroke="#CCCCCC"/>
+  <text x="415" y="1347" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="600" y="1347" fill="#555" font-size="10">Guid</text>
+  <line x1="400" y1="1351" x2="760" y2="1351" stroke="#EEEEEE"/>
+  <text x="415" y="1364" fill="#0000AA" font-size="10" font-weight="bold">FK  AlunoId</text>
+  <text x="600" y="1364" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="400" y1="1368" x2="760" y2="1368" stroke="#EEEEEE"/>
+  <text x="415" y="1381" fill="#0000AA" font-size="10" font-weight="bold">FK  DisciplinaId</text>
+  <text x="600" y="1381" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="400" y1="1385" x2="760" y2="1385" stroke="#EEEEEE"/>
+  <text x="415" y="1398" fill="#333" font-size="10">    Data</text>
+  <text x="600" y="1398" fill="#555" font-size="10">date NOT NULL</text>
+  <line x1="400" y1="1402" x2="760" y2="1402" stroke="#EEEEEE"/>
+  <text x="415" y="1415" fill="#333" font-size="10">    Presente</text>
+  <text x="600" y="1415" fill="#555" font-size="10">bit NOT NULL</text>
+  <line x1="400" y1="1419" x2="760" y2="1419" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="415" y="1432" fill="#2E75B6" font-size="10" font-style="italic">Aluno Aluno  (nav)</text>
+  <line x1="400" y1="1436" x2="760" y2="1436" stroke="#EEEEEE"/>
+  <text x="415" y="1449" fill="#2E75B6" font-size="10" font-style="italic">Disciplina Disciplina  (nav)</text>
+  <line x1="400" y1="1453" x2="760" y2="1453" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="415" y="1466" fill="#888" font-size="9">IDX: AlunoId, DisciplinaId, Data</text>
+  <text x="415" y="1480" fill="#888" font-size="9">UNIQUE: (AlunoId, DisciplinaId, Data)</text>
+  <text x="415" y="1494" fill="#888" font-size="9">OwnsMany → sem IsDeleted proprio</text>
+
+  <!-- ===== MENSAGENS ===== -->
+  <rect x="24" y="1445" width="340" height="270" rx="6" fill="white" stroke="#1A6B3C" stroke-width="2"/>
+  <rect x="24" y="1445" width="340" height="26" rx="6" fill="#1A6B3C"/>
+  <text x="194" y="1463" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Mensagens</text>
+  <rect x="24" y="1471" width="340" height="18" fill="#E8F5E9"/>
+  <text x="39" y="1484" fill="#1A6B3C" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="210" y="1484" fill="#1A6B3C" font-size="9" font-weight="bold">TIPO</text>
+  <text x="305" y="1484" fill="#1A6B3C" font-size="9" font-weight="bold">RESTRICAO</text>
+  <line x1="24" y1="1489" x2="364" y2="1489" stroke="#CCCCCC"/>
+  <text x="39" y="1502" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="210" y="1502" fill="#555" font-size="10">Guid</text>
+  <line x1="24" y1="1506" x2="364" y2="1506" stroke="#EEEEEE"/>
+  <text x="39" y="1519" fill="#333" font-size="10">    RemetenteId</text>
+  <text x="210" y="1519" fill="#555" font-size="10">Guid</text>
+  <text x="305" y="1519" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="1523" x2="364" y2="1523" stroke="#EEEEEE"/>
+  <text x="39" y="1536" fill="#333" font-size="10">    TipoRemetente</text>
+  <text x="210" y="1536" fill="#555" font-size="10">int</text>
+  <text x="305" y="1536" fill="#555" font-size="10">0=Prof 1=Dir</text>
+  <line x1="24" y1="1540" x2="364" y2="1540" stroke="#EEEEEE"/>
+  <text x="39" y="1553" fill="#333" font-size="10">    Conteudo</text>
+  <text x="210" y="1553" fill="#555" font-size="10">nvarchar(max)</text>
+  <text x="305" y="1553" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="1557" x2="364" y2="1557" stroke="#EEEEEE"/>
+  <text x="39" y="1570" fill="#333" font-size="10">    DataEnvio</text>
+  <text x="210" y="1570" fill="#555" font-size="10">datetime2</text>
+  <text x="305" y="1570" fill="#555" font-size="10">NOT NULL</text>
+  <line x1="24" y1="1574" x2="364" y2="1574" stroke="#EEEEEE"/>
+  <text x="39" y="1587" fill="#555" font-size="10" font-style="italic">    DataCriacao, IsDeleted, DataExclusao</text>
+  <line x1="24" y1="1591" x2="364" y2="1591" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <rect x="24" y="1591" width="340" height="18" fill="#F0FFF0"/>
+  <text x="39" y="1604" fill="#1A6B3C" font-size="9" font-weight="bold">NAVEGACAO</text>
+  <line x1="24" y1="1609" x2="364" y2="1609" stroke="#EEEEEE"/>
+  <text x="39" y="1622" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;MensagemDestinatario&gt; Destinatarios</text>
+  <line x1="24" y1="1626" x2="364" y2="1626" stroke="#EEEEEE"/>
+  <text x="39" y="1639" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;MensagemAnexo&gt; Anexos</text>
+  <line x1="24" y1="1643" x2="364" y2="1643" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="39" y="1656" fill="#888" font-size="9">IDX: RemetenteId, DataEnvio | FILTER: IsDeleted=0</text>
+  <text x="39" y="1670" fill="#888" font-size="9">Sem FK em RemetenteId (pode ser Prof ou Diretor)</text>
+  <text x="39" y="1684" fill="#888" font-size="9">Metodos: AdicionarDestinatario(), AdicionarAnexo()</text>
+  <text x="39" y="1698" fill="#888" font-size="9">         MarcarComoExcluida()</text>
+
+  <!-- ===== MensagemDestinatarios ===== -->
+  <rect x="400" y="1565" width="360" height="210" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="400" y="1565" width="360" height="26" rx="6" fill="#2E7D32"/>
+  <text x="580" y="1583" text-anchor="middle" fill="white" font-size="11" font-weight="bold">MensagemDestinatarios</text>
+  <rect x="400" y="1591" width="360" height="18" fill="#F1F8F1"/>
+  <text x="415" y="1604" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="600" y="1604" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="400" y1="1609" x2="760" y2="1609" stroke="#CCCCCC"/>
+  <text x="415" y="1622" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="600" y="1622" fill="#555" font-size="10">Guid</text>
+  <line x1="400" y1="1626" x2="760" y2="1626" stroke="#EEEEEE"/>
+  <text x="415" y="1639" fill="#0000AA" font-size="10" font-weight="bold">FK  MensagemId</text>
+  <text x="600" y="1639" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="400" y1="1643" x2="760" y2="1643" stroke="#EEEEEE"/>
+  <text x="415" y="1656" fill="#333" font-size="10">    DestinatarioId</text>
+  <text x="600" y="1656" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="400" y1="1660" x2="760" y2="1660" stroke="#EEEEEE"/>
+  <text x="415" y="1673" fill="#333" font-size="10">    Lida</text>
+  <text x="600" y="1673" fill="#555" font-size="10">bit DEFAULT 0</text>
+  <line x1="400" y1="1677" x2="760" y2="1677" stroke="#EEEEEE"/>
+  <text x="415" y="1690" fill="#333" font-size="10">    DataLeitura</text>
+  <text x="600" y="1690" fill="#555" font-size="10">datetime2 NULL</text>
+  <line x1="400" y1="1694" x2="760" y2="1694" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="415" y="1707" fill="#2E75B6" font-size="10" font-style="italic">Mensagem Mensagem  (nav)</text>
+  <line x1="400" y1="1711" x2="760" y2="1711" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="415" y="1724" fill="#888" font-size="9">IDX: MensagemId, DestinatarioId</text>
+  <text x="415" y="1738" fill="#888" font-size="9">UNIQUE: (MensagemId, DestinatarioId)</text>
+  <text x="415" y="1752" fill="#888" font-size="9">Sem IsDeleted — exclui junto com Mensagem</text>
+
+  <!-- ===== MensagemAnexos ===== -->
+  <rect x="800" y="1530" width="370" height="225" rx="6" fill="white" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="800" y="1530" width="370" height="26" rx="6" fill="#2E7D32"/>
+  <text x="985" y="1548" text-anchor="middle" fill="white" font-size="11" font-weight="bold">MensagemAnexos</text>
+  <rect x="800" y="1556" width="370" height="18" fill="#F1F8F1"/>
+  <text x="815" y="1569" fill="#2E7D32" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="1020" y="1569" fill="#2E7D32" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="800" y1="1574" x2="1170" y2="1574" stroke="#CCCCCC"/>
+  <text x="815" y="1587" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="1020" y="1587" fill="#555" font-size="10">Guid</text>
+  <line x1="800" y1="1591" x2="1170" y2="1591" stroke="#EEEEEE"/>
+  <text x="815" y="1604" fill="#0000AA" font-size="10" font-weight="bold">FK  MensagemId</text>
+  <text x="1020" y="1604" fill="#555" font-size="10">Guid NOT NULL</text>
+  <line x1="800" y1="1608" x2="1170" y2="1608" stroke="#EEEEEE"/>
+  <text x="815" y="1621" fill="#333" font-size="10">    Url</text>
+  <text x="1020" y="1621" fill="#555" font-size="10">nvarchar(1000) NOT NULL</text>
+  <line x1="800" y1="1625" x2="1170" y2="1625" stroke="#EEEEEE"/>
+  <text x="815" y="1638" fill="#333" font-size="10">    NomeArquivo</text>
+  <text x="1020" y="1638" fill="#555" font-size="10">nvarchar(500) NOT NULL</text>
+  <line x1="800" y1="1642" x2="1170" y2="1642" stroke="#EEEEEE"/>
+  <text x="815" y="1655" fill="#333" font-size="10">    TamanhoBytes</text>
+  <text x="1020" y="1655" fill="#555" font-size="10">bigint NOT NULL</text>
+  <line x1="800" y1="1659" x2="1170" y2="1659" stroke="#EEEEEE"/>
+  <text x="815" y="1672" fill="#333" font-size="10">    TipoArquivo</text>
+  <text x="1020" y="1672" fill="#555" font-size="10">nvarchar(10) NOT NULL</text>
+  <line x1="800" y1="1676" x2="1170" y2="1676" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="815" y="1689" fill="#2E75B6" font-size="10" font-style="italic">Mensagem Mensagem  (nav)</text>
+  <line x1="800" y1="1693" x2="1170" y2="1693" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="815" y="1706" fill="#888" font-size="9">IDX: MensagemId</text>
+  <text x="815" y="1720" fill="#888" font-size="9">CHK: TamanhoBytes &lt;= 10485760 (10MB)</text>
+  <text x="815" y="1734" fill="#888" font-size="9">CHK: TipoArquivo IN ('jpg','jpeg','png','pdf')</text>
+  <text x="815" y="1748" fill="#888" font-size="9">URL → Azure Blob Storage</text>
+
+  <!-- ================================================================ -->
+  <!-- SUPPORT DOMAIN ZONE -->
+  <!-- ================================================================ -->
+  <rect x="1220" y="660" width="920" height="1420" rx="10" fill="#FFF3E0" stroke="#7B3F00" stroke-width="2" stroke-dasharray="9,4"/>
+  <text x="1680" y="683" text-anchor="middle" fill="#7B3F00" font-size="13" font-weight="bold">BANCO ESCOLA — SupportDomain (Contexto RH / Financeiro)</text>
+
+  <!-- ===== FUNCIONARIOS ===== -->
+  <rect x="1234" y="696" width="400" height="410" rx="6" fill="white" stroke="#7B3F00" stroke-width="2"/>
+  <rect x="1234" y="696" width="400" height="26" rx="6" fill="#7B3F00"/>
+  <text x="1434" y="714" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Funcionarios  (Professor em RH)</text>
+  <rect x="1234" y="722" width="400" height="18" fill="#FFF3E0"/>
+  <text x="1249" y="735" fill="#7B3F00" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="1470" y="735" fill="#7B3F00" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="1234" y1="740" x2="1634" y2="740" stroke="#CCCCCC"/>
+  <text x="1249" y="753" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="1470" y="753" fill="#555" font-size="10">Guid</text>
+  <line x1="1234" y1="757" x2="1634" y2="757" stroke="#EEEEEE"/>
+  <text x="1249" y="770" fill="#2E75B6" font-size="10" font-weight="bold">REF ProfessorId</text>
+  <text x="1470" y="770" fill="#555" font-size="10">Guid NOT NULL (sem FK)</text>
+  <line x1="1234" y1="774" x2="1634" y2="774" stroke="#EEEEEE"/>
+  <text x="1249" y="787" fill="#AA6600" font-size="10">VO  Endereco_Logradouro</text>
+  <text x="1470" y="787" fill="#555" font-size="10">nvarchar(300)</text>
+  <line x1="1234" y1="791" x2="1634" y2="791" stroke="#EEEEEE"/>
+  <text x="1249" y="804" fill="#AA6600" font-size="10">VO  Endereco_Numero</text>
+  <text x="1470" y="804" fill="#555" font-size="10">nvarchar(20)</text>
+  <line x1="1234" y1="808" x2="1634" y2="808" stroke="#EEEEEE"/>
+  <text x="1249" y="821" fill="#AA6600" font-size="10">VO  Endereco_Bairro</text>
+  <text x="1470" y="821" fill="#555" font-size="10">nvarchar(150)</text>
+  <line x1="1234" y1="825" x2="1634" y2="825" stroke="#EEEEEE"/>
+  <text x="1249" y="838" fill="#AA6600" font-size="10">VO  Endereco_Cidade</text>
+  <text x="1470" y="838" fill="#555" font-size="10">nvarchar(150)</text>
+  <line x1="1234" y1="842" x2="1634" y2="842" stroke="#EEEEEE"/>
+  <text x="1249" y="855" fill="#AA6600" font-size="10">VO  Endereco_Estado</text>
+  <text x="1470" y="855" fill="#555" font-size="10">char(2)</text>
+  <line x1="1234" y1="859" x2="1634" y2="859" stroke="#EEEEEE"/>
+  <text x="1249" y="872" fill="#AA6600" font-size="10">VO  Endereco_CEP</text>
+  <text x="1470" y="872" fill="#555" font-size="10">nvarchar(9)</text>
+  <line x1="1234" y1="876" x2="1634" y2="876" stroke="#EEEEEE"/>
+  <text x="1249" y="889" fill="#555" font-size="10" font-style="italic">    DataCriacao, DataAtualizacao</text>
+  <line x1="1234" y1="893" x2="1634" y2="893" stroke="#EEEEEE"/>
+  <text x="1249" y="906" fill="#555" font-size="10" font-style="italic">    IsDeleted, DataExclusao</text>
+  <line x1="1234" y1="910" x2="1634" y2="910" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <rect x="1234" y="910" width="400" height="18" fill="#FFF8F0"/>
+  <text x="1249" y="923" fill="#7B3F00" font-size="9" font-weight="bold">NAVEGACAO</text>
+  <line x1="1234" y1="928" x2="1634" y2="928" stroke="#EEEEEE"/>
+  <text x="1249" y="941" fill="#888" font-size="10" font-style="italic">— sem colecoes proprias</text>
+  <line x1="1234" y1="945" x2="1634" y2="945" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="1249" y="958" fill="#888" font-size="9">IDX: ProfessorId</text>
+  <text x="1249" y="971" fill="#2E75B6" font-size="9" font-style="italic">ProfessorId = Id em Professores (CoreDomain)</text>
+  <text x="1249" y="984" fill="#888" font-size="9">VO Endereco: OwnedOne no EF Core</text>
+  <text x="1249" y="997" fill="#888" font-size="9">Criado via DomainEvent: ProfessorCriadoEvent</text>
+  <text x="1249" y="1010" fill="#888" font-size="9">Metodos: AtualizarEndereco(), MarcarComoExcluido()</text>
+
+  <!-- ===== MATRICULAS ===== -->
+  <rect x="1660" y="696" width="460" height="470" rx="6" fill="white" stroke="#7B3F00" stroke-width="2"/>
+  <rect x="1660" y="696" width="460" height="26" rx="6" fill="#7B3F00"/>
+  <text x="1890" y="714" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Matriculas</text>
+  <rect x="1660" y="722" width="460" height="18" fill="#FFF3E0"/>
+  <text x="1675" y="735" fill="#7B3F00" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="1920" y="735" fill="#7B3F00" font-size="9" font-weight="bold">TIPO / RESTRICAO</text>
+  <line x1="1660" y1="740" x2="2120" y2="740" stroke="#CCCCCC"/>
+  <text x="1675" y="753" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="1920" y="753" fill="#555" font-size="10">Guid</text>
+  <line x1="1660" y1="757" x2="2120" y2="757" stroke="#EEEEEE"/>
+  <text x="1675" y="770" fill="#2E75B6" font-size="10" font-weight="bold">REF AlunoId</text>
+  <text x="1920" y="770" fill="#555" font-size="10">Guid NOT NULL (sem FK)</text>
+  <line x1="1660" y1="774" x2="2120" y2="774" stroke="#EEEEEE"/>
+  <text x="1675" y="787" fill="#333" font-size="10">    StatusMatricula</text>
+  <text x="1920" y="787" fill="#555" font-size="10">int  0=Ativa 1=Cancelada 2=Suspensa</text>
+  <line x1="1660" y1="791" x2="2120" y2="791" stroke="#EEEEEE"/>
+  <text x="1675" y="804" fill="#333" font-size="10">    MensalidadeEmDia</text>
+  <text x="1920" y="804" fill="#555" font-size="10">bit NOT NULL</text>
+  <line x1="1660" y1="808" x2="2120" y2="808" stroke="#EEEEEE"/>
+  <text x="1675" y="821" fill="#333" font-size="10">    DataMatricula</text>
+  <text x="1920" y="821" fill="#555" font-size="10">datetime2 NOT NULL</text>
+  <line x1="1660" y1="825" x2="2120" y2="825" stroke="#EEEEEE"/>
+  <text x="1675" y="838" fill="#333" font-size="10">    DataCancelamento</text>
+  <text x="1920" y="838" fill="#555" font-size="10">datetime2 NULL</text>
+  <line x1="1660" y1="842" x2="2120" y2="842" stroke="#EEEEEE"/>
+  <text x="1675" y="855" fill="#333" font-size="10">    MotivoCancelamento</text>
+  <text x="1920" y="855" fill="#555" font-size="10">nvarchar(500) NULL</text>
+  <line x1="1660" y1="859" x2="2120" y2="859" stroke="#EEEEEE"/>
+  <text x="1675" y="872" fill="#AA6600" font-size="10">VO  EnderecoAluno_Logradouro</text>
+  <text x="1920" y="872" fill="#555" font-size="10">nvarchar(300)</text>
+  <line x1="1660" y1="876" x2="2120" y2="876" stroke="#EEEEEE"/>
+  <text x="1675" y="889" fill="#AA6600" font-size="10">VO  EnderecoAluno_Numero</text>
+  <text x="1920" y="889" fill="#555" font-size="10">nvarchar(20)</text>
+  <line x1="1660" y1="893" x2="2120" y2="893" stroke="#EEEEEE"/>
+  <text x="1675" y="906" fill="#AA6600" font-size="10">VO  EnderecoAluno_Bairro</text>
+  <text x="1920" y="906" fill="#555" font-size="10">nvarchar(150)</text>
+  <line x1="1660" y1="910" x2="2120" y2="910" stroke="#EEEEEE"/>
+  <text x="1675" y="923" fill="#AA6600" font-size="10">VO  EnderecoAluno_Cidade</text>
+  <text x="1920" y="923" fill="#555" font-size="10">nvarchar(150)</text>
+  <line x1="1660" y1="927" x2="2120" y2="927" stroke="#EEEEEE"/>
+  <text x="1675" y="940" fill="#AA6600" font-size="10">VO  EnderecoAluno_Estado</text>
+  <text x="1920" y="940" fill="#555" font-size="10">char(2)</text>
+  <line x1="1660" y1="944" x2="2120" y2="944" stroke="#EEEEEE"/>
+  <text x="1675" y="957" fill="#AA6600" font-size="10">VO  EnderecoAluno_CEP</text>
+  <text x="1920" y="957" fill="#555" font-size="10">nvarchar(9)</text>
+  <line x1="1660" y1="961" x2="2120" y2="961" stroke="#EEEEEE"/>
+  <text x="1675" y="974" fill="#555" font-size="10" font-style="italic">    DataCriacao, DataAtualizacao, IsDeleted, DataExclusao</text>
+  <line x1="1660" y1="978" x2="2120" y2="978" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <rect x="1660" y="978" width="460" height="18" fill="#FFF8F0"/>
+  <text x="1675" y="991" fill="#7B3F00" font-size="9" font-weight="bold">NAVEGACAO</text>
+  <line x1="1660" y1="996" x2="2120" y2="996" stroke="#EEEEEE"/>
+  <text x="1675" y="1009" fill="#2E75B6" font-size="10" font-style="italic">IReadOnlyCollection&lt;Boleto&gt; Boletos</text>
+  <line x1="1660" y1="1013" x2="2120" y2="1013" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="1675" y="1026" fill="#888" font-size="9">IDX: AlunoId, StatusMatricula | FILTER: IsDeleted=0</text>
+  <text x="1675" y="1039" fill="#2E75B6" font-size="9" font-style="italic">AlunoId = Id em Alunos (CoreDomain) — sem FK fisica</text>
+  <text x="1675" y="1052" fill="#888" font-size="9">Criado via DomainEvent: AlunoCriadoEvent</text>
+  <text x="1675" y="1065" fill="#888" font-size="9">Metodos: Ativar(), Cancelar(), Suspender()</text>
+  <text x="1675" y="1078" fill="#888" font-size="9">         MarcarMensalidadeEmDia(), MarcarAtrasada()</text>
+  <text x="1675" y="1091" fill="#888" font-size="9">         MarcarComoExcluida()</text>
+
+  <!-- ===== BOLETOS ===== -->
+  <rect x="1234" y="1140" width="860" height="320" rx="6" fill="white" stroke="#999999" stroke-width="2" stroke-dasharray="7,3"/>
+  <rect x="1234" y="1140" width="860" height="26" rx="6" fill="#999999"/>
+  <text x="1664" y="1158" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Boletos  (estrutura preparada — sem implementacao)</text>
+  <rect x="1234" y="1166" width="860" height="18" fill="#F5F5F5"/>
+  <text x="1249" y="1179" fill="#777" font-size="9" font-weight="bold">CAMPO</text>
+  <text x="1560" y="1179" fill="#777" font-size="9" font-weight="bold">TIPO</text>
+  <text x="1760" y="1179" fill="#777" font-size="9" font-weight="bold">RESTRICAO</text>
+  <line x1="1234" y1="1184" x2="2094" y2="1184" stroke="#CCCCCC"/>
+  <text x="1249" y="1197" fill="#880000" font-size="10" font-weight="bold">PK  Id</text>
+  <text x="1560" y="1197" fill="#777" font-size="10">Guid</text>
+  <line x1="1234" y1="1201" x2="2094" y2="1201" stroke="#EEEEEE"/>
+  <text x="1249" y="1214" fill="#555" font-size="10" font-weight="bold">FK  MatriculaId</text>
+  <text x="1560" y="1214" fill="#777" font-size="10">Guid</text>
+  <text x="1760" y="1214" fill="#777" font-size="10">FK → Matriculas NOT NULL</text>
+  <line x1="1234" y1="1218" x2="2094" y2="1218" stroke="#EEEEEE"/>
+  <text x="1249" y="1231" fill="#777" font-size="10">    Valor</text>
+  <text x="1560" y="1231" fill="#777" font-size="10">decimal(10,2)</text>
+  <text x="1760" y="1231" fill="#777" font-size="10">NOT NULL</text>
+  <line x1="1234" y1="1235" x2="2094" y2="1235" stroke="#EEEEEE"/>
+  <text x="1249" y="1248" fill="#777" font-size="10">    DataVencimento</text>
+  <text x="1560" y="1248" fill="#777" font-size="10">datetime2</text>
+  <text x="1760" y="1248" fill="#777" font-size="10">NOT NULL</text>
+  <line x1="1234" y1="1252" x2="2094" y2="1252" stroke="#EEEEEE"/>
+  <text x="1249" y="1265" fill="#777" font-size="10">    DataPagamento</text>
+  <text x="1560" y="1265" fill="#777" font-size="10">datetime2</text>
+  <text x="1760" y="1265" fill="#777" font-size="10">NULL</text>
+  <line x1="1234" y1="1269" x2="2094" y2="1269" stroke="#EEEEEE"/>
+  <text x="1249" y="1282" fill="#777" font-size="10">    StatusBoleto</text>
+  <text x="1560" y="1282" fill="#777" font-size="10">int</text>
+  <text x="1760" y="1282" fill="#777" font-size="10">0=Pendente 1=Pago 2=Cancelado</text>
+  <line x1="1234" y1="1286" x2="2094" y2="1286" stroke="#EEEEEE"/>
+  <text x="1249" y="1299" fill="#777" font-size="10">    CodigoExterno</text>
+  <text x="1560" y="1299" fill="#777" font-size="10">nvarchar(200)</text>
+  <text x="1760" y="1299" fill="#777" font-size="10">NULL — chave API bancaria futura</text>
+  <line x1="1234" y1="1303" x2="2094" y2="1303" stroke="#EEEEEE"/>
+  <text x="1249" y="1316" fill="#777" font-size="10" font-style="italic">    DataCriacao, DataAtualizacao, IsDeleted, DataExclusao</text>
+  <line x1="1234" y1="1320" x2="2094" y2="1320" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="1249" y="1333" fill="#888" font-size="9" font-style="italic">NAVEGACAO:  Matricula Matricula  (nav)</text>
+  <line x1="1234" y1="1337" x2="2094" y2="1337" stroke="#DDDDDD" stroke-dasharray="3,2"/>
+  <text x="1664" y="1355" text-anchor="middle" fill="#C0392B" font-size="10" font-weight="bold">TABELA CRIADA / METODOS RETORNAM NotImplementedException</text>
+  <text x="1664" y="1372" text-anchor="middle" fill="#888" font-size="9">IDX: MatriculaId, StatusBoleto | CodigoExterno preparado para Asaas / Gerencianet</text>
+  <text x="1664" y="1389" text-anchor="middle" fill="#888" font-size="9">Metodos a implementar: Emitir(), RegistrarPagamento(), Cancelar()</text>
+  <text x="1664" y="1406" text-anchor="middle" fill="#888" font-size="9">Fase futura: webhook bancario → PUT /api/v1/boletos/{id}/pagamento</text>
+  <text x="1664" y="1423" text-anchor="middle" fill="#888" font-size="9">DomainEvent futuro: BoletoVencendoEvent, BoletoPageEvent</text>
+  <text x="1664" y="1440" text-anchor="middle" fill="#888" font-size="9">FK real: MatriculaId → Matriculas (unico relacionamento dentro do SupportDomain)</text>
+
+  <!-- ================================================================ -->
+  <!-- RELATIONSHIPS  -->
+  <!-- ================================================================ -->
+
+  <!-- MASTER: AspNetUsers 1 → N RefreshTokens -->
+  <line x1="375" y1="494" x2="354" y2="510" stroke="#555" stroke-width="1.5" marker-start="url(#one-end)" marker-end="url(#crow-many)"/>
+  <!-- MASTER: AspNetUsers 1 → N ApiLogs -->
+  <line x1="530" y1="366" x2="530" y2="390" stroke="#555" stroke-width="1.5" marker-start="url(#one-end)" marker-end="url(#crow-many)"/>
+
+  <!-- CORE: Turmas 1 → N TurmaProfessores -->
+  <line x1="194" y1="1006" x2="194" y2="1040" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Turmas 1 → N TurmaAlunos -->
+  <line x1="150" y1="1006" x2="150" y2="1245" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Professores 1 → N TurmaProfessores -->
+  <line x1="450" y1="1006" x2="364" y2="1097" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Alunos 1 → N TurmaAlunos -->
+  <line x1="870" y1="1026" x2="364" y2="1302" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Professores 1 → N Disciplinas -->
+  <line x1="580" y1="1036" x2="580" y2="1060" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Alunos 1 → N AlunoResponsaveis -->
+  <line x1="985" y1="1026" x2="985" y2="1050" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Alunos 1 → N Notas -->
+  <line x1="1040" y1="1026" x2="1040" y2="1285" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Alunos 1 → N Presencas -->
+  <line x1="840" y1="1026" x2="640" y2="1290" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Disciplinas → Notas -->
+  <line x1="760" y1="1150" x2="900" y2="1370" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Disciplinas → Presencas -->
+  <line x1="580" y1="1260" x2="580" y2="1290" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Mensagens 1 → N MensagemDestinatarios -->
+  <line x1="300" y1="1715" x2="400" y2="1650" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+  <!-- CORE: Mensagens 1 → N MensagemAnexos -->
+  <line x1="364" y1="1600" x2="800" y2="1600" stroke="#1A6B3C" stroke-width="1.5" marker-start="url(#one-end-green)" marker-end="url(#crow-many-green)"/>
+
+  <!-- SUPPORT: Matriculas 1 → N Boletos -->
+  <line x1="1890" y1="1166" x2="1890" y2="1140" stroke="#7B3F00" stroke-width="1.5" marker-start="url(#one-end-brown)" marker-end="url(#crow-many-brown)"/>
+
+  <!-- CROSS-BC: Professores → Funcionarios (dashed blue) -->
+  <line x1="1170" y1="820" x2="1234" y2="830" stroke="#2E75B6" stroke-width="1.5" stroke-dasharray="8,4" marker-end="url(#cross-bc-end)"/>
+  <text x="1178" y="810" fill="#2E75B6" font-size="9" font-weight="bold">DomainEvent</text>
+
+  <!-- CROSS-BC: Alunos → Matriculas (dashed blue) -->
+  <line x1="1170" y1="760" x2="1660" y2="770" stroke="#2E75B6" stroke-width="1.5" stroke-dasharray="8,4" marker-end="url(#cross-bc-end)"/>
+  <text x="1310" y="750" fill="#2E75B6" font-size="9" font-weight="bold">DomainEvent (mesmo Guid)</text>
+
+  <!-- Domain Events box -->
+  <rect x="1234" y="1490" width="860" height="130" rx="8" fill="#FFF9E6" stroke="#E6B800" stroke-width="2"/>
+  <text x="1664" y="1512" text-anchor="middle" fill="#7B5A00" font-size="12" font-weight="bold">Domain Events — Comunicacao entre Bounded Contexts</text>
+  <line x1="1250" y1="1518" x2="2078" y2="1518" stroke="#DDCC00" stroke-width="1"/>
+  <text x="1264" y="1534" fill="#555" font-size="10">ProfessorCriadoEvent (CoreDomain)  →  Handler cria Funcionario no SupportDomain</text>
+  <text x="1264" y="1551" fill="#555" font-size="10">AlunoCriadoEvent (CoreDomain)       →  Handler cria Matricula no SupportDomain</text>
+  <text x="1264" y="1568" fill="#555" font-size="10">MatriculaCanceladaEvent (Support)   →  Handler remove Aluno das Turmas ativas (CoreDomain)</text>
+  <text x="1264" y="1585" fill="#555" font-size="10">ProfessorExcluidoEvent (CoreDomain) →  Handler soft-delete em Funcionario (SupportDomain)</text>
+  <text x="1264" y="1602" fill="#555" font-size="10">Despacho: EscolaDbContext.SaveChangesAsync() percorre DomainEvents e invoca handlers via DI</text>
+
+</svg>
