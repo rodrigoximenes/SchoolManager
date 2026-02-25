@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolManager.Application.Commands.Turmas.CriarTurma;
 using SchoolManager.Application.Queries.Turmas.ListarTurmas;
 using SchoolManager.Domain.CoreDomain.Turmas.Enums;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SchoolManager.WebApi.Controllers.v1;
 
@@ -45,7 +46,9 @@ public sealed class TurmaController : ControllerBase
         var validation = await _validator.ValidateAsync(command, ct);
 
         if (!validation.IsValid)
+        {
             return BadRequest(validation.ToDictionary());
+        }
 
         var result = await _criarHandler.HandleAsync(command, ct);
         return CreatedAtAction(nameof(ObterPorId), new { id = result.TurmaId }, result);
@@ -75,6 +78,8 @@ public sealed class TurmaController : ControllerBase
     public async Task<IActionResult> ObterPorId(Guid id, CancellationToken ct)
     {
         // TODO: implementar ObterTurmaPorIdQueryHandler
+        var query = new ListarTurmasQuery(1, true, 1, 1);
+        var result = await _listarHandler.HandleAsync(query, ct);
         return Ok(new { id, msg = "TODO: ObterTurmaPorIdQueryHandler" });
     }
 }

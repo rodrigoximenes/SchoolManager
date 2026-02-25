@@ -14,10 +14,8 @@ public sealed class TurmaTests
     [Fact]
     public void Criar_ComDadosValidos_DeveCriarTurmaAtiva()
     {
-        // Act
         var turma = Turma.Criar(Turno.Manha, 2025);
 
-        // Assert
         turma.Id.Should().NotBeEmpty();
         turma.Turno.Should().Be(Turno.Manha);
         turma.Periodo.Should().Be(2025);
@@ -59,7 +57,8 @@ public sealed class TurmaTests
 
         turma.AdicionarProfessor(professorId);
 
-        turma.Professores.Should().ContainSingle().Which.Should().Be(professorId);
+        turma.Professores.Should().ContainSingle()
+            .Which.ProfessorId.Should().Be(professorId);
         turma.DomainEvents.Should().ContainSingle()
             .Which.Should().BeOfType<ProfessorAdicionadoTurmaEvent>();
     }
@@ -71,7 +70,7 @@ public sealed class TurmaTests
         var professorId = Guid.NewGuid();
 
         turma.AdicionarProfessor(professorId);
-        turma.AdicionarProfessor(professorId); // segunda vez — não deve duplicar
+        turma.AdicionarProfessor(professorId);
 
         turma.Professores.Should().HaveCount(1);
     }
@@ -84,8 +83,7 @@ public sealed class TurmaTests
 
         var act = () => turma.AdicionarProfessor(Guid.NewGuid());
 
-        act.Should().Throw<DomainException>()
-            .WithMessage("*inativa*");
+        act.Should().Throw<DomainException>().WithMessage("*inativa*");
     }
 
     [Fact]
@@ -109,7 +107,8 @@ public sealed class TurmaTests
 
         turma.AdicionarAluno(alunoId);
 
-        turma.Alunos.Should().ContainSingle().Which.Should().Be(alunoId);
+        turma.Alunos.Should().ContainSingle()
+            .Which.AlunoId.Should().Be(alunoId);
         turma.DomainEvents.Should().ContainSingle()
             .Which.Should().BeOfType<AlunoAdicionadoTurmaEvent>();
     }
@@ -122,8 +121,7 @@ public sealed class TurmaTests
 
         var act = () => turma.AdicionarAluno(Guid.NewGuid());
 
-        act.Should().Throw<DomainException>()
-            .WithMessage("*inativa*");
+        act.Should().Throw<DomainException>().WithMessage("*inativa*");
     }
 
     // ── RemoverAluno ──────────────────────────────────────────────────────────
@@ -150,8 +148,7 @@ public sealed class TurmaTests
 
         var act = () => turma.RemoverAluno(Guid.NewGuid());
 
-        act.Should().Throw<DomainException>()
-            .WithMessage("*não encontrado*");
+        act.Should().Throw<DomainException>().WithMessage("*não encontrado*");
     }
 
     // ── Desativar ─────────────────────────────────────────────────────────────
@@ -177,8 +174,7 @@ public sealed class TurmaTests
 
         var act = () => turma.Desativar();
 
-        act.Should().Throw<DomainException>()
-            .WithMessage("*já está inativa*");
+        act.Should().Throw<DomainException>().WithMessage("*já está inativa*");
     }
 
     // ── Excluir ───────────────────────────────────────────────────────────────
@@ -199,14 +195,13 @@ public sealed class TurmaTests
     }
 
     [Fact]
-    public void Excluir_TurmaAinda_Ativa_DeveLancarDomainException()
+    public void Excluir_TurmaAindaAtiva_DeveLancarDomainException()
     {
         var turma = Turma.Criar(Turno.Manha, 2025);
 
         var act = () => turma.Excluir();
 
-        act.Should().Throw<DomainException>()
-            .WithMessage("*Desative*");
+        act.Should().Throw<DomainException>().WithMessage("*Desative*");
     }
 
     [Fact]
@@ -218,7 +213,6 @@ public sealed class TurmaTests
 
         var act = () => turma.Excluir();
 
-        act.Should().Throw<DomainException>()
-            .WithMessage("*já foi excluída*");
+        act.Should().Throw<DomainException>().WithMessage("*já foi excluída*");
     }
 }

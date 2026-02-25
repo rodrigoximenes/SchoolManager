@@ -7,10 +7,10 @@
     <UserSecretsId>schoolmanager-webapi-secrets</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <!-- RateLimiting, IHttpContextAccessor etc. já vêm do SDK.Web — não instalar via NuGet -->
     <PackageReference Include="Asp.Versioning.Http"                               Version="8.*" />
     <PackageReference Include="FluentValidation.AspNetCore"                       Version="11.*" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"     Version="9.*" />
-    <PackageReference Include="Microsoft.AspNetCore.RateLimiting"                 Version="9.*" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.*" />
     <PackageReference Include="Serilog.AspNetCore"                                Version="8.*" />
     <PackageReference Include="Serilog.Sinks.Console"                             Version="6.*" />

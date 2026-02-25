@@ -28,9 +28,10 @@ public sealed class TenantResolver : ITenantResolver
         var claim = _httpContextAccessor.HttpContext?.User
             .FindFirstValue("EscolaId");
 
-        return string.IsNullOrWhiteSpace(claim) || !Guid.TryParse(claim, out var escolaId)
-            ? throw new UnauthorizedAccessException("EscolaId ausente ou inválido no token.")
-            : escolaId;
+        if (string.IsNullOrWhiteSpace(claim) || !Guid.TryParse(claim, out var escolaId))
+            throw new UnauthorizedAccessException("EscolaId ausente ou inválido no token.");
+
+        return escolaId;
     }
 
     public string ObterConnectionString(Guid escolaId)
@@ -39,8 +40,9 @@ public sealed class TenantResolver : ITenantResolver
             .AsNoTracking()
             .FirstOrDefault(e => e.Id == escolaId && e.Ativo);
 
-        return escola is null
-            ? throw new InvalidOperationException($"Escola '{escolaId}' não encontrada ou inativa.")
-            : escola.ConnectionString;
+        if (escola is null)
+            throw new InvalidOperationException($"Escola '{escolaId}' não encontrada ou inativa.");
+
+        return escola.ConnectionString;
     }
 }

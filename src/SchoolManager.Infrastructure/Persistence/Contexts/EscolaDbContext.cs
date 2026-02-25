@@ -14,7 +14,7 @@ namespace SchoolManager.Infrastructure.Persistence.Contexts;
 /// <summary>
 /// DbContext do banco de cada escola (multi-tenancy database-per-tenant).
 /// Instanciado com a ConnectionString do tenant resolvida pelo TenantResolver.
-/// 
+///
 /// Responsabilidades adicionais:
 /// 1. Filtro global de soft delete em todas as entidades
 /// 2. Despacho de DomainEvents após SaveChangesAsync
@@ -24,14 +24,14 @@ public sealed class EscolaDbContext : DbContext
     private readonly IServiceProvider _serviceProvider;
 
     // CoreDomain
-    public DbSet<Turma> Turmas => Set<Turma>();
+    public DbSet<Turma>     Turmas      => Set<Turma>();
     public DbSet<Professor> Professores => Set<Professor>();
-    public DbSet<Aluno> Alunos => Set<Aluno>();
-    public DbSet<Mensagem> Mensagens => Set<Mensagem>();
+    public DbSet<Aluno>     Alunos      => Set<Aluno>();
+    public DbSet<Mensagem>  Mensagens   => Set<Mensagem>();
 
     // SupportDomain
     public DbSet<Funcionario> Funcionarios => Set<Funcionario>();
-    public DbSet<Matricula> Matriculas => Set<Matricula>();
+    public DbSet<Matricula>   Matriculas   => Set<Matricula>();
 
     public EscolaDbContext(
         DbContextOptions<EscolaDbContext> options,
@@ -44,25 +44,29 @@ public sealed class EscolaDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Aplica todas as IEntityTypeConfiguration da assembly de Infrastructure
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EscolaDbContext).Assembly);
 
-        // ── Filtro global soft delete ─────────────────────────────────────────
-        // Aplica automaticamente em qualquer entidade que herde de Entity
+        // ── Filtro global de soft delete ──────────────────────────────────────
+        // Aplica em qualquer tipo que herde de Entity e tenha a propriedade IsDeleted
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
-            if (!typeof(Entity).IsAssignableFrom(entityType.ClrType))
+            var clrType = entityType.ClrType;
+            if (!typeof(Entity).IsAssignableFrom(clrType))
             {
                 continue;
             }
 
-            if (entityType.ClrType.GetProperty("IsDeleted") is null)
+            if (clrType.GetProperty("IsDeleted") is null)
             {
                 continue;
             }
 
-            modelBuilder.Entity(entityType.ClrType)
-                .HasQueryFilter(ExpressionFilterHelper.GetIsDeletedFilter(entityType.ClrType));
+            var param      = System.Linq.Expressions.Expression.Parameter(clrType, "e");
+            var property   = System.Linq.Expressions.Expression.Property(param, "IsDeleted");
+            var notDeleted = System.Linq.Expressions.Expression.Not(property);
+            var lambda     = System.Linq.Expressions.Expression.Lambda(notDeleted, param);
+
+            modelBuilder.Entity(clrType).HasQueryFilter(lambda);
         }
     }
 
@@ -70,7 +74,7 @@ public sealed class EscolaDbContext : DbContext
     /// Override de SaveChangesAsync:
     /// 1. Persiste os dados
     /// 2. Coleta DomainEvents de todas as entidades modificadas
-    /// 3. Despacha cada evento para seus handlers registrados no DI
+    /// 3. Despacha cada evento para seus handlers via DI
     /// </summary>
     public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {
@@ -96,26 +100,13 @@ public sealed class EscolaDbContext : DbContext
         foreach (var domainEvent in domainEvents)
         {
             var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
-            var handlers = _serviceProvider.GetServices(handlerType);
+            var handlers    = _serviceProvider.GetServices(handlerType);
 
             foreach (var handler in handlers)
             {
-                await (Task)handlerType
-                    .GetMethod(nameof(IDomainEventHandler<IDomainEvent>.HandleAsync))!
-                    .Invoke(handler, new object[] { domainEvent, ct })!;
+                var method = handlerType.GetMethod(nameof(IDomainEventHandler<IDomainEvent>.HandleAsync))!;
+                await (Task)method.Invoke(handler, new object[] { domainEvent, ct })!;
             }
         }
-    }
-}
-
-// Helper para o filtro de soft delete via expression tree
-internal static class ExpressionFilterHelper
-{
-    public static System.Linq.Expressions.LambdaExpression GetIsDeletedFilter(Type entityType)
-    {
-        var param = System.Linq.Expressions.Expression.Parameter(entityType, "e");
-        var property = System.Linq.Expressions.Expression.Property(param, "IsDeleted");
-        var notDeleted = System.Linq.Expressions.Expression.Not(property);
-        return System.Linq.Expressions.Expression.Lambda(notDeleted, param);
     }
 }

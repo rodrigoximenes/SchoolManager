@@ -27,8 +27,8 @@ public static class InfrastructureServiceExtensions
         services.AddScoped<EscolaDbContext>(sp =>
         {
             var tenantResolver = sp.GetRequiredService<ITenantResolver>();
-            var escolaId = tenantResolver.ObterEscolaId();
-            var connString = tenantResolver.ObterConnectionString(escolaId);
+            var escolaId       = tenantResolver.ObterEscolaId();
+            var connString     = tenantResolver.ObterConnectionString(escolaId);
 
             var optionsBuilder = new DbContextOptionsBuilder<EscolaDbContext>();
             optionsBuilder.UseNpgsql(connString);
@@ -37,20 +37,20 @@ public static class InfrastructureServiceExtensions
         });
 
         // ── Repositórios ──────────────────────────────────────────────────────
-        services.AddScoped<ITurmaRepository, TurmaRepository>();
-        services.AddScoped<IProfessorRepository, ProfessorRepository>();
-        services.AddScoped<IAlunoRepository, AlunoRepository>();
-        services.AddScoped<IMensagemRepository, MensagemRepository>();
+        services.AddScoped<ITurmaRepository,      TurmaRepository>();
+        services.AddScoped<IProfessorRepository,  ProfessorRepository>();
+        services.AddScoped<IAlunoRepository,      AlunoRepository>();
+        services.AddScoped<IMensagemRepository,   MensagemRepository>();
         services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
-        services.AddScoped<IMatriculaRepository, MatriculaRepository>();
+        services.AddScoped<IMatriculaRepository,  MatriculaRepository>();
 
         // ── Domain Event Handlers ─────────────────────────────────────────────
-        services.AddScoped<IDomainEventHandler<ProfessorCriadoEvent>, ProfessorCriadoEventHandler>();
+        services.AddScoped<IDomainEventHandler<ProfessorCriadoEvent>,  ProfessorCriadoEventHandler>();
         services.AddScoped<IDomainEventHandler<ProfessorExcluidoEvent>, ProfessorExcluidoEventHandler>();
-        services.AddScoped<IDomainEventHandler<AlunoCriadoEvent>, AlunoCriadoEventHandler>();
+        services.AddScoped<IDomainEventHandler<AlunoCriadoEvent>,       AlunoCriadoEventHandler>();
 
         // ── MultiTenancy ──────────────────────────────────────────────────────
-        //services.AddHttpContextAccessor();
+        services.AddHttpContextAccessor();
         services.AddScoped<ITenantResolver, TenantResolver>();
 
         return services;

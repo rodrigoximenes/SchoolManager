@@ -14,7 +14,7 @@ public sealed class TurmaRepository : ITurmaRepository
 
     public async Task<Turma?> ObterPorIdAsync(Guid id, CancellationToken ct = default)
         => await _context.Turmas
-            .Include("_professores") // shadow nav para List<Guid>
+            .Include("_professores")
             .Include("_alunos")
             .FirstOrDefaultAsync(t => t.Id == id, ct);
 
@@ -26,8 +26,8 @@ public sealed class TurmaRepository : ITurmaRepository
         if (periodo.HasValue) query = query.Where(t => t.Periodo == periodo.Value);
         if (ativo.HasValue)   query = query.Where(t => t.Ativo   == ativo.Value);
 
-        var total  = await query.CountAsync(ct);
-        var itens  = await query
+        var total = await query.CountAsync(ct);
+        var itens = await query
             .OrderByDescending(t => t.Periodo)
             .ThenBy(t => t.Turno)
             .Skip(paginacao.Skip)

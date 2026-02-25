@@ -53,7 +53,7 @@ public sealed class AlunoRepository : IAlunoRepository
         var turma = await _ctx.Turmas.FirstOrDefaultAsync(t => t.Id == turmaId, ct);
         if (turma is null) return PagedResult<Aluno>.Vazio(paginacao);
 
-        var ids   = turma.Alunos.ToList();
+        var ids   = turma.Alunos.Select(a => a.AlunoId).ToList();
         var total = ids.Count;
         var itens = await _ctx.Alunos
             .Where(a => ids.Contains(a.Id))

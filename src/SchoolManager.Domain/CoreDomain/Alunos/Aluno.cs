@@ -13,23 +13,23 @@ namespace SchoolManager.Domain.CoreDomain.Alunos;
 /// </summary>
 public sealed class Aluno : AggregateRoot
 {
-    public string Nome { get; private set; } = null!;
+    public string    Nome           { get; private set; } = null!;
     public DateOnly? DataNascimento { get; private set; }
 
     private readonly List<AlunoResponsavel> _responsaveis = new();
-    private readonly List<Nota> _notas = new();
-    private readonly List<Presenca> _presencas = new();
+    private readonly List<Nota>             _notas        = new();
+    private readonly List<Presenca>         _presencas    = new();
 
     public IReadOnlyCollection<AlunoResponsavel> Responsaveis => _responsaveis.AsReadOnly();
-    public IReadOnlyCollection<Nota> Notas => _notas.AsReadOnly();
-    public IReadOnlyCollection<Presenca> Presencas => _presencas.AsReadOnly();
+    public IReadOnlyCollection<Nota>             Notas        => _notas.AsReadOnly();
+    public IReadOnlyCollection<Presenca>         Presencas    => _presencas.AsReadOnly();
 
     private Aluno(string nome, DateOnly? dataNascimento)
     {
         Guard.AgainstNullOrWhiteSpace(nome, nameof(nome), "Nome do aluno é obrigatório.");
         Guard.Against<ArgumentException>(nome.Length > 300, "Nome não pode ter mais de 300 caracteres.");
 
-        Nome = nome.Trim();
+        Nome           = nome.Trim();
         DataNascimento = dataNascimento;
 
         AddDomainEvent(new AlunoCriadoEvent(Id, Nome));

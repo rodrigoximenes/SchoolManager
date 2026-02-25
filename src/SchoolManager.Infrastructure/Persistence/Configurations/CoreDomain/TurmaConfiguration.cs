@@ -15,43 +15,37 @@ public sealed class TurmaConfiguration : IEntityTypeConfiguration<Turma>
             .IsRequired()
             .HasConversion<int>();
 
-        builder.Property(t => t.Periodo)
-            .IsRequired();
-
-        builder.Property(t => t.Ativo)
-            .IsRequired()
-            .HasDefaultValue(true);
-
-        builder.Property(t => t.IsDeleted)
-            .IsRequired()
-            .HasDefaultValue(false);
-
+        builder.Property(t => t.Periodo).IsRequired();
+        builder.Property(t => t.Ativo).IsRequired().HasDefaultValue(true);
+        builder.Property(t => t.IsDeleted).IsRequired().HasDefaultValue(false);
         builder.Property(t => t.DataCriacao).IsRequired();
         builder.Property(t => t.DataAtualizacao);
         builder.Property(t => t.DataExclusao);
 
-        // Índices
         builder.HasIndex(t => t.Periodo);
         builder.HasIndex(t => t.Ativo);
         builder.HasIndex(t => t.IsDeleted);
 
-        // Coleções de Guid mapeadas como owned tables
-        // Turma.Professores e Turma.Alunos são List<Guid>
-        // Mapeados como tabelas separadas TurmaProfessores e TurmaAlunos
-        builder.OwnsMany(t => t.Professores, nav =>
+        // TurmaProfessor — entidade de junção owned pelo agregado
+        builder.OwnsMany<TurmaProfessor>("_professores", nav =>
         {
             nav.ToTable("TurmaProfessores");
-            nav.WithOwner().HasForeignKey("TurmaId");
-            nav.Property<Guid>("Value").HasColumnName("ProfessorId");
-            nav.HasKey("TurmaId", "Value");
+            nav.WithOwner().HasForeignKey(tp => tp.TurmaId);
+            nav.HasKey(tp => new { tp.TurmaId, tp.ProfessorId });
+            nav.Property(tp => tp.ProfessorId).IsRequired();
+            nav.Property(tp => tp.DataVinculo).IsRequired();
+            nav.HasIndex(tp => tp.ProfessorId);
         });
 
-        builder.OwnsMany(t => t.Alunos, nav =>
+        // TurmaAluno — entidade de junção owned pelo agregado
+        builder.OwnsMany<TurmaAluno>("_alunos", nav =>
         {
             nav.ToTable("TurmaAlunos");
-            nav.WithOwner().HasForeignKey("TurmaId");
-            nav.Property<Guid>("Value").HasColumnName("AlunoId");
-            nav.HasKey("TurmaId", "Value");
+            nav.WithOwner().HasForeignKey(ta => ta.TurmaId);
+            nav.HasKey(ta => new { ta.TurmaId, ta.AlunoId });
+            nav.Property(ta => ta.AlunoId).IsRequired();
+            nav.Property(ta => ta.DataVinculo).IsRequired();
+            nav.HasIndex(ta => ta.AlunoId);
         });
     }
 }
